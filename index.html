@@ -1539,50 +1539,140 @@
   <section>
     <div class="section-inner">
 
-      <!-- Contact info cards row -->
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-bottom:2.5rem;">
-        <div class="contact-info-card" style="display:flex;align-items:flex-start;gap:1rem;padding:1.5rem;">
-          <div class="contact-icon">
-            <svg viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-          </div>
-          <div><h4 style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--gray-300);margin-bottom:5px;">Address</h4><p style="font-size:0.875rem;color:var(--gray-700);line-height:1.6;">Singapore Aircargo Agents Association<br>75 Airport Boulevard, #01-01<br>Singapore 819664</p></div>
-        </div>
-        <div class="contact-info-card" style="display:flex;align-items:flex-start;gap:1rem;padding:1.5rem;">
-          <div class="contact-icon">
-            <svg viewBox="0 0 24 24"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
-          </div>
-          <div><h4 style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--gray-300);margin-bottom:5px;">Phone</h4><p style="font-size:0.875rem;color:var(--gray-700);line-height:1.6;">(+65) 6545 4620</p></div>
-        </div>
-        <div class="contact-info-card" style="display:flex;align-items:flex-start;gap:1rem;padding:1.5rem;">
-          <div class="contact-icon">
-            <svg viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-          </div>
-          <div><h4 style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--gray-300);margin-bottom:5px;">Email</h4><p style="font-size:0.875rem;color:var(--gray-700);line-height:1.6;">saaasin@saaa.org.sg</p></div>
-        </div>
-        <div class="contact-info-card" style="display:flex;align-items:flex-start;gap:1rem;padding:1.5rem;">
-          <div class="contact-icon">
-            <svg viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-          </div>
-          <div><h4 style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--gray-300);margin-bottom:5px;">Office Hours</h4><p style="font-size:0.875rem;color:var(--gray-700);line-height:1.6;">Monday – Friday<br>9:00 AM – 5:30 PM</p></div>
-        </div>
-      </div>
-
-      <!-- Google Maps embed -->
-      <div style="border-radius:16px;overflow:hidden;border:1px solid var(--gray-100);box-shadow:0 4px 20px rgba(0,0,0,0.06);">
+      <!-- Google Maps — real embed from saaa.org.sg -->
+      <div style="border-radius:16px;overflow:hidden;border:1px solid var(--gray-100);box-shadow:0 4px 20px rgba(0,0,0,0.06);margin-bottom:3rem;">
         <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.612440956893!2d103.9885!3d1.3596!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da3c0e3b5e17af%3A0x9e0b3e3b5f6f6f6f!2sSingapore%20Changi%20Airport!5e0!3m2!1sen!2ssg!4v1716000000000!5m2!1sen!2ssg"
+          src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3988.654235125695!2d103.999989!3d1.384089!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da3c702f6f2061%3A0x6840dc0c6bc60de8!2sSaaa+Cargo+Services+Pte+Ltd!5e0!3m2!1sen!2ssg!4v1434798039828"
           width="100%"
-          height="480"
+          height="460"
           style="display:block;border:none;"
           allowfullscreen=""
           loading="lazy"
           referrerpolicy="no-referrer-when-downgrade"
-          title="SAAA Office Location — Singapore Changi Airport area">
+          title="SAAA Office — 7 Airline Road, Changi Airfreight Centre">
         </iframe>
       </div>
 
-      <div style="margin-top:1.5rem;padding:1.25rem 1.5rem;background:var(--red-light);border-radius:12px;border-left:3px solid var(--red);">
-        <p style="font-size:0.9rem;color:var(--gray-700);">Have an enquiry? Reach us directly at <strong style="color:var(--red);">saaasin@saaa.org.sg</strong> or call <strong style="color:var(--red);">(+65) 6545 4620</strong> during office hours.</p>
+      <!-- Three entity cards -->
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;margin-bottom:2rem;">
+
+        <!-- SAAA Cargo Services -->
+        <div style="background:var(--white);border:1px solid var(--gray-100);border-radius:14px;overflow:hidden;">
+          <div style="background:var(--red);padding:1.25rem 1.5rem;">
+            <p style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin-bottom:4px;">Entity</p>
+            <h3 style="font-size:1.05rem;font-weight:700;color:white;line-height:1.3;">SAAA Cargo Services Pte Ltd</h3>
+          </div>
+          <div style="padding:1.5rem;display:flex;flex-direction:column;gap:1.1rem;">
+            <div style="display:flex;gap:12px;align-items:flex-start;">
+              <div style="flex-shrink:0;width:34px;height:34px;background:var(--red-light);border-radius:8px;display:flex;align-items:center;justify-content:center;">
+                <svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:var(--red);fill:none;stroke-width:1.8"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+              </div>
+              <div>
+                <p style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--gray-300);margin-bottom:3px;">Address</p>
+                <p style="font-size:0.875rem;color:var(--gray-700);line-height:1.6;">7 Airline Road, #04-06<br>Cargo Agents Building E<br>Changi Airfreight Centre<br>Singapore 819834</p>
+              </div>
+            </div>
+            <div style="display:flex;gap:12px;align-items:flex-start;">
+              <div style="flex-shrink:0;width:34px;height:34px;background:var(--red-light);border-radius:8px;display:flex;align-items:center;justify-content:center;">
+                <svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:var(--red);fill:none;stroke-width:1.8"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+              </div>
+              <div>
+                <p style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--gray-300);margin-bottom:3px;">Mailing Address</p>
+                <p style="font-size:0.875rem;color:var(--gray-700);line-height:1.6;">Box 614 Airmail Transit Centre<br>Singapore 918104</p>
+              </div>
+            </div>
+            <div style="border-top:1px solid var(--gray-100);padding-top:1rem;display:flex;flex-direction:column;gap:6px;">
+              <div style="display:flex;justify-content:space-between;font-size:0.875rem;">
+                <span style="color:var(--gray-500);">Telephone</span>
+                <span style="font-weight:500;color:var(--gray-900);">+65 6545 5006</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;font-size:0.875rem;">
+                <span style="color:var(--gray-500);">Fax</span>
+                <span style="font-weight:500;color:var(--gray-900);">+65 6542 6820</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;font-size:0.875rem;">
+                <span style="color:var(--gray-500);">Email</span>
+                <span style="font-weight:500;color:var(--red);">admin@saaa.org.sg</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SAAA Permit -->
+        <div style="background:var(--white);border:1px solid var(--gray-100);border-radius:14px;overflow:hidden;">
+          <div style="background:var(--red-dark);padding:1.25rem 1.5rem;">
+            <p style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin-bottom:4px;">Entity</p>
+            <h3 style="font-size:1.05rem;font-weight:700;color:white;line-height:1.3;">SAAA Permit &amp; Certificate</h3>
+          </div>
+          <div style="padding:1.5rem;display:flex;flex-direction:column;gap:1.1rem;">
+            <div style="display:flex;gap:12px;align-items:flex-start;">
+              <div style="flex-shrink:0;width:34px;height:34px;background:var(--red-light);border-radius:8px;display:flex;align-items:center;justify-content:center;">
+                <svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:var(--red);fill:none;stroke-width:1.8"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+              </div>
+              <div>
+                <p style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--gray-300);margin-bottom:3px;">Address</p>
+                <p style="font-size:0.875rem;color:var(--gray-700);line-height:1.6;">105 Airport Cargo Road #01-107<br>SATS Airfreight Terminal 3, Core H<br>Singapore 819462</p>
+              </div>
+            </div>
+            <div style="border-top:1px solid var(--gray-100);padding-top:1rem;display:flex;flex-direction:column;gap:6px;margin-top:auto;">
+              <div style="display:flex;justify-content:space-between;font-size:0.875rem;">
+                <span style="color:var(--gray-500);">Telephone</span>
+                <span style="font-weight:500;color:var(--gray-900);">+65 6545 9597</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;font-size:0.875rem;">
+                <span style="color:var(--gray-500);">Fax</span>
+                <span style="font-weight:500;color:var(--gray-900);">+65 6543 0147</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;font-size:0.875rem;">
+                <span style="color:var(--gray-500);">Email</span>
+                <span style="font-weight:500;color:var(--red);">scs@saaa.org.sg</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SAAA Secretariat -->
+        <div style="background:var(--white);border:1px solid var(--gray-100);border-radius:14px;overflow:hidden;">
+          <div style="background:var(--gray-900);padding:1.25rem 1.5rem;">
+            <p style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:4px;">Entity</p>
+            <h3 style="font-size:1.05rem;font-weight:700;color:white;line-height:1.3;">SAAA Secretariat</h3>
+          </div>
+          <div style="padding:1.5rem;display:flex;flex-direction:column;gap:1.1rem;">
+            <div style="display:flex;gap:12px;align-items:flex-start;">
+              <div style="flex-shrink:0;width:34px;height:34px;background:var(--red-light);border-radius:8px;display:flex;align-items:center;justify-content:center;">
+                <svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:var(--red);fill:none;stroke-width:1.8"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+              </div>
+              <div>
+                <p style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--gray-300);margin-bottom:3px;">Address</p>
+                <p style="font-size:0.875rem;color:var(--gray-700);line-height:1.6;">7 Airline Road, #04-06<br>Cargo Agents Building E<br>Changi Airfreight Centre<br>Singapore 819834</p>
+              </div>
+            </div>
+            <div style="display:flex;gap:12px;align-items:flex-start;">
+              <div style="flex-shrink:0;width:34px;height:34px;background:var(--red-light);border-radius:8px;display:flex;align-items:center;justify-content:center;">
+                <svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:var(--red);fill:none;stroke-width:1.8"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+              </div>
+              <div>
+                <p style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--gray-300);margin-bottom:3px;">Mailing Address</p>
+                <p style="font-size:0.875rem;color:var(--gray-700);line-height:1.6;">Box 558 Airmail Transit Centre<br>Singapore 918102</p>
+              </div>
+            </div>
+            <div style="border-top:1px solid var(--gray-100);padding-top:1rem;display:flex;flex-direction:column;gap:6px;">
+              <div style="display:flex;justify-content:space-between;font-size:0.875rem;">
+                <span style="color:var(--gray-500);">Telephone</span>
+                <span style="font-weight:500;color:var(--gray-900);">+65 6545 4620</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;font-size:0.875rem;">
+                <span style="color:var(--gray-500);">Fax</span>
+                <span style="font-weight:500;color:var(--gray-900);">+65 6542 6820</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;font-size:0.875rem;">
+                <span style="color:var(--gray-500);">Email</span>
+                <span style="font-weight:500;color:var(--red);">saaasin@saaa.org.sg</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
 
     </div>
