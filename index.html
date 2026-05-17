@@ -1097,9 +1097,7 @@
       <li><button onclick="showPage('contact')" id="nav-contact">Contact</button></li>
     </ul>
 
-    <div class="nav-cta">
-      <button class="btn btn-primary" onclick="showPage('members')">Member Login</button>
-    </div>
+
   </div>
 </nav>
 
@@ -1119,8 +1117,8 @@
         <h1>Connecting <em>Singapore's</em> Air Cargo Community</h1>
         <p>The Singapore Aircargo Agents Association has been the leading representative body for air cargo agents in Singapore since 1972, fostering excellence across the industry.</p>
         <div class="hero-actions">
-          <button class="btn btn-primary" onclick="showPage('members')" style="font-size:14px; padding:12px 24px;">Explore Members</button>
           <button class="btn" style="background:rgba(255,255,255,0.1); color:white; border:1.5px solid rgba(255,255,255,0.2); font-size:14px; padding:12px 24px;" onclick="showPage('about')">About SAAA</button>
+          <button class="btn" style="background:rgba(255,255,255,0.1); color:white; border:1.5px solid rgba(255,255,255,0.2); font-size:14px; padding:12px 24px;" onclick="showPage('contact')">Contact Us</button>
         </div>
       </div>
       <div>
@@ -1238,9 +1236,7 @@
               <div class="event-arrow">→</div>
             </div>
           </div>
-          <div style="margin-top:1rem;">
-            <button class="btn btn-outline" style="width:100%;" onclick="showPage('training')">View All Events &amp; Training</button>
-          </div>
+
         </div>
       </div>
     </div>
@@ -1254,7 +1250,6 @@
         <h2>Ready to join the SAAA network?</h2>
         <p>Connect with Singapore's leading air cargo agents and industry professionals.</p>
       </div>
-      <button class="btn btn-white" onclick="showPage('contact')">Get in Touch →</button>
     </div>
   </div>
 
@@ -1338,13 +1333,7 @@
 
   <section>
     <div class="section-inner">
-      <div class="member-filter">
-        <button class="filter-btn active" onclick="setFilter(this,'all')">All Members</button>
-        <button class="filter-btn" onclick="setFilter(this,'ordinary')">Ordinary Members</button>
-        <button class="filter-btn" onclick="setFilter(this,'associate')">Associate Members</button>
-        <button class="filter-btn" onclick="setFilter(this,'affiliate')">Affiliate Members</button>
-        <button class="filter-btn" onclick="setFilter(this,'corporate')">Corporate Members</button>
-      </div>
+
 
       <div class="members-grid">
         <!-- 20 sample member cards -->
@@ -1396,7 +1385,7 @@
           </div>
           <h3>Neutral Airway Bill</h3>
           <p>Official SAAA Neutral Airway Bills for members. Available in multiple formats to suit your operational requirements. Order online or contact the secretariat.</p>
-          <div style="margin-top:1rem;"><button class="btn btn-outline" style="font-size:13px;padding:7px 16px;">Request NAB</button></div>
+
         </div>
 
         <div class="service-card">
@@ -1405,7 +1394,7 @@
           </div>
           <h3>Bar Code Labels</h3>
           <p>IATA-compliant bar code labels for air waybills and cargo tracking. Supply chain-ready formats available for both small and bulk orders.</p>
-          <div style="margin-top:1rem;"><button class="btn btn-outline" style="font-size:13px;padding:7px 16px;">Order Labels</button></div>
+
         </div>
 
         <div class="service-card">
@@ -1414,7 +1403,7 @@
           </div>
           <h3>Permit &amp; Certificate of Origin</h3>
           <p>Assistance with Singapore customs permits and certificates of origin. Our secretariat guides members through the documentation process efficiently.</p>
-          <div style="margin-top:1rem;"><button class="btn btn-outline" style="font-size:13px;padding:7px 16px;">Learn More</button></div>
+
         </div>
 
         <div class="service-card">
@@ -1423,17 +1412,13 @@
           </div>
           <h3>Secretariat Facilities</h3>
           <p>SAAA secretariat facilities available for members, including meeting rooms, conference facilities, and administrative support services.</p>
-          <div style="margin-top:1rem;"><button class="btn btn-outline" style="font-size:13px;padding:7px 16px;">Book Facilities</button></div>
+
         </div>
       </div>
 
       <div style="margin-top:3rem;" class="subpage-section">
         <h3>Standard Trading Conditions (STC 2025)</h3>
         <p style="font-size:0.9rem;color:var(--gray-500);margin-bottom:1.25rem;line-height:1.7;">The SAAA Standard Trading Conditions govern the relationship between member companies and their customers. The 2025 edition includes updates to liability caps, digital documentation, and cross-border provisions.</p>
-        <button class="btn btn-primary" style="font-size:13px;padding:9px 20px;">
-          <svg viewBox="0 0 16 16" style="width:14px;height:14px;stroke:white;fill:none;stroke-width:1.8"><path d="M8 2v8m-3-3l3 3 3-3M3 13h10"/></svg>
-          Download STC 2025
-        </button>
       </div>
     </div>
   </section>
@@ -1460,13 +1445,11 @@
           <span style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.6);display:block;margin-bottom:0.5rem;">New Requirement</span>
           <h3 style="font-size:1.3rem;font-weight:700;color:white;margin-bottom:0.75rem;">CBTA Dangerous Goods</h3>
           <p style="color:rgba(255,255,255,0.75);font-size:0.9rem;line-height:1.6;">Mandatory CBTA framework for DG training effective 1 January 2023. All agents must complete updated certification.</p>
-          <div style="margin-top:1.5rem;"><button class="btn btn-white" style="font-size:13px;padding:8px 18px;">Register Now</button></div>
         </div>
         <div style="background:var(--warm-gray);border-radius:14px;padding:2rem;">
           <span style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray-300);display:block;margin-bottom:0.5rem;">Career Programme</span>
           <h3 style="font-size:1.3rem;font-weight:700;color:var(--gray-900);margin-bottom:0.75rem;">Career Conversion Programme (CCP)</h3>
           <p style="color:var(--gray-500);font-size:0.9rem;line-height:1.6;">CCP for Air Transport Professionals and Coordinators helps employers broaden their talent pool by reskilling mid-career professionals.</p>
-          <div style="margin-top:1.5rem;"><button class="btn btn-outline" style="font-size:13px;padding:8px 18px;">Learn More</button></div>
         </div>
       </div>
 
@@ -1536,7 +1519,6 @@
       <div style="margin-top:3rem; padding:2rem; background:var(--white); border:1px solid var(--gray-100); border-radius:14px;">
         <h3 style="font-weight:600;margin-bottom:0.75rem;">Advertise in Perspectives</h3>
         <p style="font-size:0.9rem;color:var(--gray-500);margin-bottom:1rem;line-height:1.7;">Reach SAAA's network of air cargo professionals. For advertising enquiries and article contributions, contact us at <strong style="color:var(--red);">saaasin@saaa.org.sg</strong> or call <strong style="color:var(--red);">(+65) 6545 4620</strong>.</p>
-        <button class="btn btn-primary" style="font-size:13px;" onclick="showPage('contact')">Get Advertising Rates</button>
       </div>
     </div>
   </section>
@@ -1599,9 +1581,8 @@
         </iframe>
       </div>
 
-      <div style="margin-top:1.5rem;padding:1.25rem 1.5rem;background:var(--red-light);border-radius:12px;border-left:3px solid var(--red);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;">
+      <div style="margin-top:1.5rem;padding:1.25rem 1.5rem;background:var(--red-light);border-radius:12px;border-left:3px solid var(--red);">
         <p style="font-size:0.9rem;color:var(--gray-700);">Have an enquiry? Reach us directly at <strong style="color:var(--red);">saaasin@saaa.org.sg</strong> or call <strong style="color:var(--red);">(+65) 6545 4620</strong> during office hours.</p>
-        <a href="mailto:saaasin@saaa.org.sg" class="btn btn-primary" style="font-size:13px;padding:9px 20px;">Email Us</a>
       </div>
 
     </div>
@@ -1688,18 +1669,6 @@
     if (navBtn) navBtn.classList.add('active');
     window.scrollTo({ top: 0, behavior: 'smooth' });
     setTimeout(initReveal, 50);
-  }
-
-  function setFilter(btn, type) {
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    document.querySelectorAll('.member-card').forEach(card => {
-      if (type === 'all' || card.dataset.type === type) {
-        card.style.display = '';
-      } else {
-        card.style.display = 'none';
-      }
-    });
   }
 
   function initReveal() {
