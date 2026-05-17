@@ -1,0 +1,1716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SAAA — Singapore Aircargo Agents Association</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Neue+Haas+Grotesk+Display+Pro:wght@400;500;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=Fraunces:ital,opsz,wght@0,9..144,300;1,9..144,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #C8102E;
+    --red-dark: #9B0B22;
+    --red-deeper: #6E0719;
+    --red-light: #F5E6E9;
+    --red-mid: #E8516A;
+    --white: #FFFFFF;
+    --off-white: #FAF8F6;
+    --warm-gray: #F2EFEB;
+    --gray-100: #E8E5E0;
+    --gray-300: #B8B4AD;
+    --gray-500: #787470;
+    --gray-700: #3E3B38;
+    --gray-900: #1A1816;
+    --font-display: 'DM Sans', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-serif: 'Fraunces', serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--off-white);
+    color: var(--gray-900);
+    line-height: 1.65;
+    font-size: 16px;
+    overflow-x: hidden;
+  }
+
+  /* ─── PAGES ─── */
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* ─── NAV ─── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--white);
+    border-bottom: 1px solid var(--gray-100);
+    box-shadow: 0 1px 0 rgba(0,0,0,0.04);
+  }
+
+  .nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    height: 68px;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    flex-shrink: 0;
+    cursor: pointer;
+  }
+
+  .logo-mark {
+    width: 40px;
+    height: 40px;
+    background: var(--red);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .logo-mark svg { width: 24px; height: 24px; fill: white; }
+
+  .logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+  }
+
+  .logo-text .abbr {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--red);
+    letter-spacing: 0.04em;
+  }
+
+  .logo-text .full {
+    font-size: 10px;
+    color: var(--gray-500);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    list-style: none;
+    flex: 1;
+    justify-content: center;
+  }
+
+  .nav-links > li { position: relative; }
+
+  .nav-links > li > a,
+  .nav-links > li > button {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 14px;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--gray-700);
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: color 0.15s, background 0.15s;
+    white-space: nowrap;
+    font-family: var(--font-body);
+  }
+
+  .nav-links > li > a:hover,
+  .nav-links > li > button:hover,
+  .nav-links > li > a.active,
+  .nav-links > li > button.active {
+    color: var(--red);
+    background: var(--red-light);
+  }
+
+  .nav-links > li > button svg {
+    width: 12px; height: 12px;
+    transition: transform 0.2s;
+  }
+
+  .nav-links > li:hover > button svg { transform: rotate(180deg); }
+
+  .dropdown {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    background: var(--white);
+    border: 1px solid var(--gray-100);
+    border-radius: 10px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.10);
+    min-width: 220px;
+    padding: 6px;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-4px);
+    transition: opacity 0.15s, transform 0.15s;
+    z-index: 200;
+  }
+
+  .nav-links > li:hover .dropdown {
+    opacity: 1;
+    pointer-events: all;
+    transform: translateY(0);
+  }
+
+  .dropdown a {
+    display: block;
+    padding: 8px 12px;
+    font-size: 13px;
+    color: var(--gray-700);
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background 0.12s, color 0.12s;
+    cursor: pointer;
+  }
+
+  .dropdown a:hover {
+    background: var(--red-light);
+    color: var(--red);
+  }
+
+  .nav-cta {
+    margin-left: auto;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 20px;
+    border-radius: 8px;
+    font-size: 13.5px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.15s;
+    border: none;
+    font-family: var(--font-body);
+    white-space: nowrap;
+  }
+
+  .btn-primary {
+    background: var(--red);
+    color: white;
+  }
+
+  .btn-primary:hover { background: var(--red-dark); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--red);
+    border: 1.5px solid var(--red);
+  }
+
+  .btn-outline:hover { background: var(--red-light); }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--gray-700);
+    border: 1.5px solid var(--gray-100);
+  }
+
+  .btn-ghost:hover { background: var(--warm-gray); }
+
+  /* ─── HERO ─── */
+  .hero {
+    position: relative;
+    background: var(--gray-900);
+    overflow: hidden;
+    min-height: 580px;
+    display: flex;
+    align-items: center;
+  }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(200,16,46,0.12) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(200,16,46,0.12) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .hero-glow {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,16,46,0.25) 0%, transparent 70%);
+    top: -200px;
+    right: -100px;
+  }
+
+  .hero-glow-2 {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,16,46,0.12) 0%, transparent 70%);
+    bottom: -150px;
+    left: 10%;
+  }
+
+  .hero-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(200,16,46,0.15);
+    border: 1px solid rgba(200,16,46,0.3);
+    color: #FF8FA0;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 100px;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-eyebrow span { width: 6px; height: 6px; border-radius: 50%; background: var(--red-mid); display: block; animation: pulse 2s infinite; }
+
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.4rem, 4vw, 3.6rem);
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.25rem;
+  }
+
+  .hero h1 em {
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: var(--red-mid);
+    font-weight: 300;
+  }
+
+  .hero p {
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 2rem;
+    max-width: 480px;
+    line-height: 1.7;
+  }
+
+  .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+  .hero-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .hero-stat {
+    background: rgba(255,255,255,0.04);
+    padding: 1.5rem;
+    text-align: center;
+    transition: background 0.2s;
+  }
+
+  .hero-stat:hover { background: rgba(200,16,46,0.1); }
+
+  .hero-stat .num {
+    font-family: var(--font-display);
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: white;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .hero-stat .num span { color: var(--red-mid); }
+
+  .hero-stat .label {
+    font-size: 12px;
+    color: rgba(255,255,255,0.45);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  /* ─── SECTIONS ─── */
+  section { padding: 5rem 0; }
+
+  .section-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .section-label {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 0.75rem;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    font-weight: 700;
+    color: var(--gray-900);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+  }
+
+  .section-subtitle {
+    font-size: 1.05rem;
+    color: var(--gray-500);
+    max-width: 560px;
+    line-height: 1.7;
+  }
+
+  .section-header { margin-bottom: 3rem; }
+
+  /* ─── NEWS STRIP ─── */
+  .news-strip {
+    background: var(--red);
+    padding: 0.7rem 0;
+    overflow: hidden;
+  }
+
+  .news-strip-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .news-strip .tag {
+    background: rgba(255,255,255,0.2);
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    padding: 3px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+
+  .news-strip p {
+    color: rgba(255,255,255,0.9);
+    font-size: 13px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* ─── CARDS ─── */
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+
+  .card {
+    background: var(--white);
+    border: 1px solid var(--gray-100);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+
+  .card:hover { box-shadow: 0 8px 30px rgba(0,0,0,0.08); transform: translateY(-2px); }
+
+  .card-img {
+    aspect-ratio: 16/9;
+    background: var(--warm-gray);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .card-img-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .card-body { padding: 1.25rem; }
+
+  .card-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--red);
+    background: var(--red-light);
+    padding: 3px 8px;
+    border-radius: 4px;
+    margin-bottom: 0.75rem;
+  }
+
+  .card h3 {
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 1.35;
+    margin-bottom: 0.5rem;
+    color: var(--gray-900);
+  }
+
+  .card p { font-size: 0.875rem; color: var(--gray-500); line-height: 1.6; }
+
+  .card-date { font-size: 12px; color: var(--gray-300); margin-top: 0.75rem; }
+
+  /* ─── FEATURE STRIP ─── */
+  .feature-strip { background: var(--white); border-top: 1px solid var(--gray-100); border-bottom: 1px solid var(--gray-100); }
+
+  .feature-strip-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2.5rem 2rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+
+  .feature-item { display: flex; flex-direction: column; gap: 0.5rem; }
+
+  .feature-icon {
+    width: 42px;
+    height: 42px;
+    background: var(--red-light);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .feature-icon svg { width: 20px; height: 20px; stroke: var(--red); fill: none; stroke-width: 1.8; }
+
+  .feature-item h4 { font-weight: 600; font-size: 0.95rem; color: var(--gray-900); }
+  .feature-item p { font-size: 0.85rem; color: var(--gray-500); line-height: 1.5; }
+
+  /* ─── EVENTS ─── */
+  .event-list { display: flex; flex-direction: column; gap: 1rem; }
+
+  .event-item {
+    background: var(--white);
+    border: 1px solid var(--gray-100);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    transition: border-color 0.2s;
+    cursor: pointer;
+  }
+
+  .event-item:hover { border-color: var(--red); }
+
+  .event-date-badge {
+    flex-shrink: 0;
+    width: 52px;
+    text-align: center;
+    background: var(--red-light);
+    border-radius: 10px;
+    padding: 8px 4px;
+  }
+
+  .event-date-badge .day { font-size: 1.5rem; font-weight: 700; color: var(--red); line-height: 1; }
+  .event-date-badge .month { font-size: 11px; font-weight: 600; color: var(--red-dark); text-transform: uppercase; letter-spacing: 0.05em; }
+
+  .event-info h4 { font-weight: 600; font-size: 1rem; color: var(--gray-900); margin-bottom: 2px; }
+  .event-info p { font-size: 0.875rem; color: var(--gray-500); }
+
+  .event-arrow { margin-left: auto; color: var(--gray-300); }
+
+  /* ─── SERVICES GRID ─── */
+  .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; }
+
+  .service-card {
+    background: var(--white);
+    border: 1px solid var(--gray-100);
+    border-radius: 14px;
+    padding: 1.75rem;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+
+  .service-card:hover {
+    border-color: var(--red);
+    box-shadow: 0 4px 20px rgba(200,16,46,0.08);
+  }
+
+  .service-card .svc-icon {
+    width: 48px;
+    height: 48px;
+    background: var(--red-light);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+
+  .service-card .svc-icon svg { width: 24px; height: 24px; stroke: var(--red); fill: none; stroke-width: 1.8; }
+  .service-card h3 { font-weight: 600; font-size: 1rem; margin-bottom: 0.5rem; }
+  .service-card p { font-size: 0.875rem; color: var(--gray-500); line-height: 1.6; }
+
+  /* ─── BANNER ─── */
+  .cta-banner {
+    background: var(--red);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-banner-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .cta-banner-inner {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .cta-banner h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 700;
+    color: white;
+    margin-bottom: 0.5rem;
+  }
+
+  .cta-banner p { color: rgba(255,255,255,0.75); font-size: 1rem; }
+
+  .btn-white {
+    background: white;
+    color: var(--red);
+    font-weight: 700;
+    padding: 11px 28px;
+  }
+
+  .btn-white:hover { background: var(--red-light); }
+
+  /* ─── ABOUT PAGE ─── */
+  .about-hero {
+    background: var(--warm-gray);
+    padding: 4rem 0;
+  }
+
+  .about-hero-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .breadcrumb {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    font-size: 13px;
+    color: var(--gray-500);
+    margin-bottom: 1.5rem;
+  }
+
+  .breadcrumb a { color: var(--red); text-decoration: none; cursor: pointer; }
+  .breadcrumb span { color: var(--gray-300); }
+
+  .page-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--gray-900);
+    margin-bottom: 1rem;
+  }
+
+  .page-subtitle { font-size: 1.1rem; color: var(--gray-500); max-width: 600px; line-height: 1.7; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2rem; }
+
+  .prose h3 { font-weight: 600; font-size: 1.15rem; margin-bottom: 0.75rem; color: var(--gray-900); }
+  .prose p { font-size: 0.95rem; color: var(--gray-500); line-height: 1.75; margin-bottom: 1rem; }
+
+  .milestone-timeline { position: relative; padding-left: 2rem; }
+  .milestone-timeline::before {
+    content: '';
+    position: absolute;
+    left: 7px; top: 0; bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--red), var(--gray-100));
+  }
+
+  .milestone {
+    position: relative;
+    margin-bottom: 2rem;
+    padding-left: 1rem;
+  }
+
+  .milestone::before {
+    content: '';
+    position: absolute;
+    left: -1.7rem;
+    top: 6px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--red);
+    border: 3px solid var(--white);
+    box-shadow: 0 0 0 2px var(--red);
+  }
+
+  .milestone .year { font-size: 12px; font-weight: 700; color: var(--red); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px; }
+  .milestone h4 { font-weight: 600; font-size: 0.95rem; margin-bottom: 4px; }
+  .milestone p { font-size: 0.875rem; color: var(--gray-500); }
+
+  /* ─── MEMBERS ─── */
+  .member-filter {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+  }
+
+  .filter-btn {
+    padding: 7px 16px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    border: 1.5px solid var(--gray-100);
+    background: var(--white);
+    color: var(--gray-700);
+    transition: all 0.15s;
+    font-family: var(--font-body);
+  }
+
+  .filter-btn.active, .filter-btn:hover {
+    border-color: var(--red);
+    background: var(--red-light);
+    color: var(--red);
+  }
+
+  .members-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+
+  .member-card {
+    background: var(--white);
+    border: 1px solid var(--gray-100);
+    border-radius: 12px;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.75rem;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+
+  .member-card:hover { border-color: var(--red); box-shadow: 0 4px 16px rgba(200,16,46,0.06); }
+
+  .member-logo {
+    width: 60px;
+    height: 60px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 16px;
+    color: white;
+  }
+
+  .member-card h4 { font-size: 0.875rem; font-weight: 600; color: var(--gray-900); line-height: 1.3; }
+  .member-card .type { font-size: 11px; color: var(--gray-300); }
+
+  /* ─── TRAINING ─── */
+  .course-table { width: 100%; border-collapse: collapse; }
+  .course-table th {
+    text-align: left;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gray-500);
+    padding: 12px 16px;
+    border-bottom: 2px solid var(--gray-100);
+  }
+
+  .course-table td {
+    padding: 14px 16px;
+    font-size: 0.9rem;
+    border-bottom: 1px solid var(--gray-100);
+    color: var(--gray-700);
+  }
+
+  .course-table tr:last-child td { border-bottom: none; }
+  .course-table tr:hover td { background: var(--warm-gray); }
+
+  .badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 4px;
+  }
+
+  .badge-open { background: #E8F7F0; color: #1A7A4A; }
+  .badge-upcoming { background: #FEF3CD; color: #8B6A00; }
+  .badge-full { background: #FCE8EB; color: var(--red-dark); }
+  .badge-cbta { background: var(--red-light); color: var(--red); }
+
+  /* ─── CONTACT ─── */
+  .contact-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 3rem; }
+
+  .contact-info-card {
+    background: var(--white);
+    border: 1px solid var(--gray-100);
+    border-radius: 14px;
+    padding: 2rem;
+  }
+
+  .contact-info-item { display: flex; gap: 1rem; align-items: flex-start; margin-bottom: 1.5rem; }
+  .contact-info-item:last-child { margin-bottom: 0; }
+
+  .contact-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--red-light);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .contact-icon svg { width: 18px; height: 18px; stroke: var(--red); fill: none; stroke-width: 1.8; }
+
+  .contact-info-item h4 { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gray-300); margin-bottom: 4px; }
+  .contact-info-item p { font-size: 0.9rem; color: var(--gray-700); line-height: 1.5; }
+
+  .form-group { margin-bottom: 1.25rem; }
+  .form-group label { display: block; font-size: 13px; font-weight: 600; color: var(--gray-700); margin-bottom: 6px; }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1.5px solid var(--gray-100);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-family: var(--font-body);
+    color: var(--gray-900);
+    background: var(--white);
+    transition: border-color 0.15s;
+    outline: none;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--red);
+    box-shadow: 0 0 0 3px rgba(200,16,46,0.08);
+  }
+
+  .form-group textarea { resize: vertical; min-height: 120px; }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--gray-900);
+    color: rgba(255,255,255,0.7);
+    padding: 4rem 0 2rem;
+  }
+
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
+  }
+
+  .footer-brand .logo-text .abbr { font-size: 20px; }
+  .footer-brand .logo-text .full { color: rgba(255,255,255,0.4); }
+
+  .footer-tagline {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.45);
+    margin-top: 1rem;
+    margin-bottom: 1.25rem;
+    line-height: 1.5;
+    max-width: 240px;
+  }
+
+  .social-links { display: flex; gap: 8px; }
+
+  .social-btn {
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    background: rgba(255,255,255,0.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .social-btn:hover { background: rgba(200,16,46,0.4); }
+  .social-btn svg { width: 16px; height: 16px; fill: rgba(255,255,255,0.7); }
+
+  .footer-col h5 {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 1rem;
+  }
+
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .footer-col ul li a {
+    font-size: 0.875rem;
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+    transition: color 0.15s;
+    cursor: pointer;
+  }
+
+  .footer-col ul li a:hover { color: white; }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 13px;
+    color: rgba(255,255,255,0.35);
+  }
+
+  .footer-bottom a { color: var(--red-mid); text-decoration: none; }
+
+  /* ─── PUBLICATION CARDS ─── */
+  .pub-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1.5rem; }
+
+  .pub-card {
+    background: var(--white);
+    border: 1px solid var(--gray-100);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+
+  .pub-card:hover { border-color: var(--red); transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+
+  .pub-cover {
+    aspect-ratio: 3/4;
+    background: linear-gradient(135deg, var(--red) 0%, var(--red-deeper) 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 1.5rem;
+    text-align: center;
+  }
+
+  .pub-cover svg { width: 40px; height: 40px; stroke: rgba(255,255,255,0.7); fill: none; stroke-width: 1.5; }
+  .pub-cover .issue { font-size: 11px; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 0.1em; }
+  .pub-cover .pub-title { font-family: var(--font-serif); font-style: italic; font-size: 1.1rem; color: white; line-height: 1.2; }
+
+  .pub-meta { padding: 1rem; }
+  .pub-meta h4 { font-size: 0.875rem; font-weight: 600; margin-bottom: 4px; }
+  .pub-meta p { font-size: 12px; color: var(--gray-300); }
+
+  /* ─── SUBPAGE SECTION ─── */
+  .subpage-section {
+    background: var(--white);
+    border-radius: 16px;
+    border: 1px solid var(--gray-100);
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .subpage-section h3 { font-weight: 600; font-size: 1.15rem; margin-bottom: 1rem; color: var(--gray-900); }
+
+  .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+
+  .info-item { padding: 1rem; background: var(--warm-gray); border-radius: 10px; }
+  .info-item .label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gray-300); margin-bottom: 4px; }
+  .info-item .value { font-size: 0.9rem; font-weight: 500; color: var(--gray-900); }
+
+  /* Scroll-reveal animation */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+  <div class="nav-inner">
+    <div class="logo" onclick="showPage('home')">
+      <div class="logo-mark">
+        <svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-10"/></svg>
+      </div>
+      <div class="logo-text">
+        <span class="abbr">SAAA</span>
+        <span class="full">Singapore Aircargo Agents Association</span>
+      </div>
+    </div>
+
+    <ul class="nav-links">
+      <li>
+        <button onclick="showPage('home')" id="nav-home" class="active">Home
+          <svg viewBox="0 0 12 12"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+        <div class="dropdown">
+          <a onclick="showPage('home')">Latest News</a>
+          <a onclick="showPage('home')">Announcements</a>
+          <a onclick="showPage('home')">Upcoming Events</a>
+        </div>
+      </li>
+      <li>
+        <button onclick="showPage('about')" id="nav-about">About Us
+          <svg viewBox="0 0 12 12"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+        <div class="dropdown">
+          <a onclick="showPage('about')">Welcome Note</a>
+          <a onclick="showPage('about')">History &amp; Milestones</a>
+          <a onclick="showPage('about')">Vision &amp; Mission</a>
+          <a onclick="showPage('about')">Organisation Structure</a>
+          <a onclick="showPage('about')">Committees</a>
+          <a onclick="showPage('about')">Standard Trading Conditions</a>
+        </div>
+      </li>
+      <li>
+        <button onclick="showPage('members')" id="nav-members">Members
+          <svg viewBox="0 0 12 12"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+        <div class="dropdown">
+          <a onclick="showPage('members')">Listing by Logo</a>
+          <a onclick="showPage('members')">Listing by Name</a>
+          <a onclick="showPage('members')">Member Categories</a>
+        </div>
+      </li>
+      <li>
+        <button onclick="showPage('services')" id="nav-services">Services
+          <svg viewBox="0 0 12 12"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+        <div class="dropdown">
+          <a onclick="showPage('services')">Neutral Airway Bill</a>
+          <a onclick="showPage('services')">Bar Code Labels</a>
+          <a onclick="showPage('services')">Permit &amp; Certificate of Origin</a>
+          <a onclick="showPage('services')">Facilities</a>
+        </div>
+      </li>
+      <li>
+        <button onclick="showPage('training')" id="nav-training">Training
+          <svg viewBox="0 0 12 12"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+        <div class="dropdown">
+          <a onclick="showPage('training')">Training History</a>
+          <a onclick="showPage('training')">Programme Calendar</a>
+          <a onclick="showPage('training')">CBTA Updates</a>
+          <a onclick="showPage('training')">Our Courses</a>
+        </div>
+      </li>
+      <li><button onclick="showPage('publications')" id="nav-publications">Publications</button></li>
+      <li><button onclick="showPage('contact')" id="nav-contact">Contact</button></li>
+    </ul>
+
+    <div class="nav-cta">
+      <button class="btn btn-primary" onclick="showPage('members')">Member Login</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════════════════════════
+     HOME PAGE
+══════════════════════════════════════════════════════════════ -->
+<div id="page-home" class="page active">
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-glow-2"></div>
+    <div class="hero-inner">
+      <div>
+        <div class="hero-eyebrow"><span></span> Singapore's Air Cargo Industry Voice</div>
+        <h1>Connecting <em>Singapore's</em> Air Cargo Community</h1>
+        <p>The Singapore Aircargo Agents Association has been the leading representative body for air cargo agents in Singapore since 1972, fostering excellence across the industry.</p>
+        <div class="hero-actions">
+          <button class="btn btn-primary" onclick="showPage('members')" style="font-size:14px; padding:12px 24px;">Explore Members</button>
+          <button class="btn" style="background:rgba(255,255,255,0.1); color:white; border:1.5px solid rgba(255,255,255,0.2); font-size:14px; padding:12px 24px;" onclick="showPage('about')">About SAAA</button>
+        </div>
+      </div>
+      <div>
+        <div class="hero-stats">
+          <div class="hero-stat"><div class="num">50<span>+</span></div><div class="label">Years of Service</div></div>
+          <div class="hero-stat"><div class="num">200<span>+</span></div><div class="label">Member Companies</div></div>
+          <div class="hero-stat"><div class="num">IATA</div><div class="label">Affiliated Body</div></div>
+          <div class="hero-stat"><div class="num">SG<span>#1</span></div><div class="label">Air Hub Representation</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Feature Strip -->
+  <div class="feature-strip">
+    <div class="feature-strip-inner">
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <h4>Industry Advocacy</h4>
+        <p>Representing air cargo agents in Singapore and internationally</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 14l9-5-9-5-9 5 9 5z"/><path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg>
+        </div>
+        <h4>Training &amp; Development</h4>
+        <p>CBTA-compliant DG and cargo training programmes</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+        </div>
+        <h4>Essential Documents</h4>
+        <p>Neutral Airway Bills, bar code labels, and certificates</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        </div>
+        <h4>Networking Events</h4>
+        <p>Business networking and industry events throughout the year</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- News & Events -->
+  <section style="background: var(--white);">
+    <div class="section-inner">
+      <div style="display:grid; grid-template-columns:1.5fr 1fr; gap:3rem; align-items:start;">
+        <div>
+          <div class="section-header">
+            <span class="section-label">News</span>
+            <h2 class="section-title">Latest Updates</h2>
+          </div>
+          <div class="card-grid">
+            <div class="card reveal">
+              <div class="card-img">
+                <div class="card-img-placeholder" style="background:linear-gradient(135deg,#9B0B22,#C8102E);">
+                  <svg viewBox="0 0 48 48" style="width:48px;height:48px;stroke:rgba(255,255,255,0.4);fill:none;stroke-width:1.5"><path d="M8 24h32M8 16h32M8 32h20"/></svg>
+                </div>
+              </div>
+              <div class="card-body">
+                <span class="card-tag">Training</span>
+                <h3>CBTA Dangerous Goods Training — Updated Framework</h3>
+                <p>SAAA increases community awareness on the mandatory revised DG training courses including the CBTA framework.</p>
+                <p class="card-date">July – August 2022</p>
+              </div>
+            </div>
+            <div class="card reveal" style="transition-delay:0.1s">
+              <div class="card-img">
+                <div class="card-img-placeholder" style="background:linear-gradient(135deg,#1A1816,#3E3B38);">
+                  <svg viewBox="0 0 48 48" style="width:48px;height:48px;stroke:rgba(255,255,255,0.4);fill:none;stroke-width:1.5"><path d="M6 36l10-10 8 8 10-12 8 8"/></svg>
+                </div>
+              </div>
+              <div class="card-body">
+                <span class="card-tag">Industry</span>
+                <h3>Air Cargo Industry Update: SIA Cargo Operations</h3>
+                <p>Updates on Singapore Airlines cargo operations and partnership opportunities for SAAA members.</p>
+                <p class="card-date">October 2024</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="section-header">
+            <span class="section-label">Events</span>
+            <h2 class="section-title">Upcoming</h2>
+          </div>
+          <div class="event-list">
+            <div class="event-item reveal">
+              <div class="event-date-badge"><div class="day">28</div><div class="month">Apr</div></div>
+              <div class="event-info">
+                <h4>SAAA–Empire Bison Business Networking</h4>
+                <p>Open for member companies. Register via email.</p>
+              </div>
+              <div class="event-arrow">→</div>
+            </div>
+            <div class="event-item reveal" style="transition-delay:0.1s">
+              <div class="event-date-badge"><div class="day">15</div><div class="month">Jun</div></div>
+              <div class="event-info">
+                <h4>Annual General Meeting 2026</h4>
+                <p>SAAA Annual General Meeting for all member companies.</p>
+              </div>
+              <div class="event-arrow">→</div>
+            </div>
+            <div class="event-item reveal" style="transition-delay:0.2s">
+              <div class="event-date-badge"><div class="day">22</div><div class="month">Jul</div></div>
+              <div class="event-info">
+                <h4>DG Training — CBTA Module 7</h4>
+                <p>Competency-based assessment for Dangerous Goods.</p>
+              </div>
+              <div class="event-arrow">→</div>
+            </div>
+          </div>
+          <div style="margin-top:1rem;">
+            <button class="btn btn-outline" style="width:100%;" onclick="showPage('training')">View All Events &amp; Training</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Banner -->
+  <div class="cta-banner">
+    <div class="cta-banner-grid"></div>
+    <div class="cta-banner-inner">
+      <div>
+        <h2>Ready to join the SAAA network?</h2>
+        <p>Connect with Singapore's leading air cargo agents and industry professionals.</p>
+      </div>
+      <button class="btn btn-white" onclick="showPage('contact')">Get in Touch →</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     ABOUT PAGE
+══════════════════════════════════════════════════════════════ -->
+<div id="page-about" class="page">
+  <div class="about-hero">
+    <div class="about-hero-inner">
+      <div class="breadcrumb"><a onclick="showPage('home')">Home</a><span>/</span><span>About Us</span></div>
+      <h1 class="page-title">About SAAA</h1>
+      <p class="page-subtitle">The Singapore Aircargo Agents Association — serving Singapore's air cargo industry since 1972.</p>
+    </div>
+  </div>
+
+  <section>
+    <div class="section-inner">
+      <div class="two-col">
+        <div class="prose">
+          <h3>Welcome from the President</h3>
+          <p>On behalf of the Council and Secretariat of the Singapore Aircargo Agents Association (SAAA), a warm welcome to our website. SAAA has been the voice of Singapore's air cargo agents since our founding in 1972.</p>
+          <p>We are committed to advancing the interests of our members, developing industry talent through our training programmes, and fostering strong relationships with airlines, government agencies, and international bodies.</p>
+          <p>As air cargo plays an increasingly vital role in global supply chains, SAAA continues to champion the interests of Singapore's air freight community, ensuring our members remain at the forefront of a dynamic and evolving industry.</p>
+          <div style="margin-top:1.5rem; padding-top:1.5rem; border-top:1px solid var(--gray-100);">
+            <p style="font-family:var(--font-serif);font-style:italic;font-size:1.05rem;color:var(--gray-700);">— SAAA Council President</p>
+          </div>
+        </div>
+        <div>
+          <div class="subpage-section">
+            <h3>Vision &amp; Mission</h3>
+            <div style="margin-bottom:1.25rem; padding:1.25rem; background:var(--red-light); border-radius:10px; border-left:3px solid var(--red);">
+              <p style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--red);margin-bottom:6px;">Vision</p>
+              <p style="font-size:0.95rem;color:var(--gray-700);line-height:1.6;">To be the leading representative body for air cargo agents in Singapore, recognised for our professionalism, advocacy, and industry development.</p>
+            </div>
+            <div style="padding:1.25rem; background:var(--warm-gray); border-radius:10px;">
+              <p style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--gray-500);margin-bottom:6px;">Mission</p>
+              <ul style="font-size:0.875rem;color:var(--gray-700);line-height:1.8;padding-left:1rem;">
+                <li>Represent and advocate for member interests</li>
+                <li>Develop industry skills and training standards</li>
+                <li>Facilitate networking and business connections</li>
+                <li>Promote safety and compliance in air cargo</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--white);">
+    <div class="section-inner">
+      <div class="section-header">
+        <span class="section-label">History</span>
+        <h2 class="section-title">Our Milestones</h2>
+      </div>
+      <div class="milestone-timeline" style="max-width:600px;">
+        <div class="milestone"><div class="year">1972</div><h4>SAAA Founded</h4><p>The Singapore Aircargo Agents Association was established to represent air cargo agents operating out of Singapore.</p></div>
+        <div class="milestone"><div class="year">1985</div><h4>Training Programme Launched</h4><p>Introduction of formal training courses for air cargo professionals, setting industry standards.</p></div>
+        <div class="milestone"><div class="year">1998</div><h4>IATA Affiliation</h4><p>Formal affiliation with IATA, strengthening SAAA's international standing and advocacy capacity.</p></div>
+        <div class="milestone"><div class="year">2010</div><h4>Digital Services</h4><p>Launch of electronic services including online Neutral Airway Bill and digital member directory.</p></div>
+        <div class="milestone"><div class="year">2022</div><h4>CBTA Framework Adopted</h4><p>Full adoption of the Competency-Based Training and Assessment framework for Dangerous Goods training.</p></div>
+        <div class="milestone"><div class="year">2025</div><h4>STC 2025 Published</h4><p>Release of updated Standard Trading Conditions governing member-airline relationships.</p></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     MEMBERS PAGE
+══════════════════════════════════════════════════════════════ -->
+<div id="page-members" class="page">
+  <div class="about-hero">
+    <div class="about-hero-inner">
+      <div class="breadcrumb"><a onclick="showPage('home')">Home</a><span>/</span><span>Members</span></div>
+      <h1 class="page-title">SAAA Members</h1>
+      <p class="page-subtitle">Our network of over 200 air cargo agent companies across Singapore.</p>
+    </div>
+  </div>
+
+  <section>
+    <div class="section-inner">
+      <div class="member-filter">
+        <button class="filter-btn active" onclick="setFilter(this,'all')">All Members</button>
+        <button class="filter-btn" onclick="setFilter(this,'ordinary')">Ordinary Members</button>
+        <button class="filter-btn" onclick="setFilter(this,'associate')">Associate Members</button>
+        <button class="filter-btn" onclick="setFilter(this,'affiliate')">Affiliate Members</button>
+        <button class="filter-btn" onclick="setFilter(this,'corporate')">Corporate Members</button>
+      </div>
+
+      <div class="members-grid">
+        <!-- 20 sample member cards -->
+        <div class="member-card" data-type="ordinary"><div class="member-logo" style="background:#1A6B8A">SIA</div><h4>Singapore Airlines Cargo</h4><span class="type">Ordinary Member</span></div>
+        <div class="member-card" data-type="ordinary"><div class="member-logo" style="background:#2C5F2E">KLM</div><h4>KLM Cargo Singapore</h4><span class="type">Ordinary Member</span></div>
+        <div class="member-card" data-type="ordinary"><div class="member-logo" style="background:#8B0000">DHL</div><h4>DHL Express Singapore</h4><span class="type">Ordinary Member</span></div>
+        <div class="member-card" data-type="associate"><div class="member-logo" style="background:#4B2D83">FDX</div><h4>FedEx Singapore</h4><span class="type">Associate Member</span></div>
+        <div class="member-card" data-type="associate"><div class="member-logo" style="background:#F5820A;color:var(--gray-900)">UPS</div><h4>UPS Singapore</h4><span class="type">Associate Member</span></div>
+        <div class="member-card" data-type="ordinary"><div class="member-logo" style="background:#003580">CEVA</div><h4>CEVA Logistics</h4><span class="type">Ordinary Member</span></div>
+        <div class="member-card" data-type="corporate"><div class="member-logo" style="background:#005EB8">DB</div><h4>DB Schenker Singapore</h4><span class="type">Corporate Member</span></div>
+        <div class="member-card" data-type="ordinary"><div class="member-logo" style="background:#CC0000">KN</div><h4>Kuehne + Nagel</h4><span class="type">Ordinary Member</span></div>
+        <div class="member-card" data-type="affiliate"><div class="member-logo" style="background:#004B8D">PNL</div><h4>Panalpina Singapore</h4><span class="type">Affiliate Member</span></div>
+        <div class="member-card" data-type="ordinary"><div class="member-logo" style="background:#E31837">EME</div><h4>Emirates SkyCargo</h4><span class="type">Ordinary Member</span></div>
+        <div class="member-card" data-type="ordinary"><div class="member-logo" style="background:#0D2481">CX</div><h4>Cathay Cargo</h4><span class="type">Ordinary Member</span></div>
+        <div class="member-card" data-type="associate"><div class="member-logo" style="background:#00629B">LH</div><h4>Lufthansa Cargo SG</h4><span class="type">Associate Member</span></div>
+      </div>
+
+      <div style="margin-top:3rem; padding:2rem; background:var(--white); border-radius:14px; border:1px solid var(--gray-100);">
+        <h3 style="font-weight:600;margin-bottom:1rem;">Member Categories</h3>
+        <div class="info-grid">
+          <div class="info-item"><div class="label">Ordinary Members</div><div class="value">Air cargo agents holding valid IATA licences</div></div>
+          <div class="info-item"><div class="label">Associate Members</div><div class="value">Airlines, ground handling agents, and related service providers</div></div>
+          <div class="info-item"><div class="label">Affiliate Members</div><div class="value">Organisations with indirect roles in air cargo</div></div>
+          <div class="info-item"><div class="label">Corporate Members</div><div class="value">Logistics companies with a substantial air freight component</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SERVICES PAGE
+══════════════════════════════════════════════════════════════ -->
+<div id="page-services" class="page">
+  <div class="about-hero">
+    <div class="about-hero-inner">
+      <div class="breadcrumb"><a onclick="showPage('home')">Home</a><span>/</span><span>Services</span></div>
+      <h1 class="page-title">Services</h1>
+      <p class="page-subtitle">Essential operational services and documentation support for SAAA members.</p>
+    </div>
+  </div>
+
+  <section>
+    <div class="section-inner">
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="svc-icon">
+            <svg viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          </div>
+          <h3>Neutral Airway Bill</h3>
+          <p>Official SAAA Neutral Airway Bills for members. Available in multiple formats to suit your operational requirements. Order online or contact the secretariat.</p>
+          <div style="margin-top:1rem;"><button class="btn btn-outline" style="font-size:13px;padding:7px 16px;">Request NAB</button></div>
+        </div>
+
+        <div class="service-card">
+          <div class="svc-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8H4a2 2 0 00-2 2v4a2 2 0 002 2h1M5 8V6a2 2 0 012-2h10a2 2 0 012 2v2M5 8h14"/></svg>
+          </div>
+          <h3>Bar Code Labels</h3>
+          <p>IATA-compliant bar code labels for air waybills and cargo tracking. Supply chain-ready formats available for both small and bulk orders.</p>
+          <div style="margin-top:1rem;"><button class="btn btn-outline" style="font-size:13px;padding:7px 16px;">Order Labels</button></div>
+        </div>
+
+        <div class="service-card">
+          <div class="svc-icon">
+            <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+          </div>
+          <h3>Permit &amp; Certificate of Origin</h3>
+          <p>Assistance with Singapore customs permits and certificates of origin. Our secretariat guides members through the documentation process efficiently.</p>
+          <div style="margin-top:1rem;"><button class="btn btn-outline" style="font-size:13px;padding:7px 16px;">Learn More</button></div>
+        </div>
+
+        <div class="service-card">
+          <div class="svc-icon">
+            <svg viewBox="0 0 24 24"><path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+          </div>
+          <h3>Secretariat Facilities</h3>
+          <p>SAAA secretariat facilities available for members, including meeting rooms, conference facilities, and administrative support services.</p>
+          <div style="margin-top:1rem;"><button class="btn btn-outline" style="font-size:13px;padding:7px 16px;">Book Facilities</button></div>
+        </div>
+      </div>
+
+      <div style="margin-top:3rem;" class="subpage-section">
+        <h3>Standard Trading Conditions (STC 2025)</h3>
+        <p style="font-size:0.9rem;color:var(--gray-500);margin-bottom:1.25rem;line-height:1.7;">The SAAA Standard Trading Conditions govern the relationship between member companies and their customers. The 2025 edition includes updates to liability caps, digital documentation, and cross-border provisions.</p>
+        <button class="btn btn-primary" style="font-size:13px;padding:9px 20px;">
+          <svg viewBox="0 0 16 16" style="width:14px;height:14px;stroke:white;fill:none;stroke-width:1.8"><path d="M8 2v8m-3-3l3 3 3-3M3 13h10"/></svg>
+          Download STC 2025
+        </button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     TRAINING PAGE
+══════════════════════════════════════════════════════════════ -->
+<div id="page-training" class="page">
+  <div class="about-hero">
+    <div class="about-hero-inner">
+      <div class="breadcrumb"><a onclick="showPage('home')">Home</a><span>/</span><span>Training</span></div>
+      <h1 class="page-title">Training &amp; Development</h1>
+      <p class="page-subtitle">IATA and CBTA-compliant training programmes for air cargo professionals in Singapore.</p>
+    </div>
+  </div>
+
+  <section>
+    <div class="section-inner">
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:3rem;">
+        <div style="background:var(--red);border-radius:14px;padding:2rem;position:relative;overflow:hidden;">
+          <div style="position:absolute;top:-40px;right:-40px;width:180px;height:180px;background:rgba(255,255,255,0.06);border-radius:50%;"></div>
+          <span style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.6);display:block;margin-bottom:0.5rem;">New Requirement</span>
+          <h3 style="font-size:1.3rem;font-weight:700;color:white;margin-bottom:0.75rem;">CBTA Dangerous Goods</h3>
+          <p style="color:rgba(255,255,255,0.75);font-size:0.9rem;line-height:1.6;">Mandatory CBTA framework for DG training effective 1 January 2023. All agents must complete updated certification.</p>
+          <div style="margin-top:1.5rem;"><button class="btn btn-white" style="font-size:13px;padding:8px 18px;">Register Now</button></div>
+        </div>
+        <div style="background:var(--warm-gray);border-radius:14px;padding:2rem;">
+          <span style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray-300);display:block;margin-bottom:0.5rem;">Career Programme</span>
+          <h3 style="font-size:1.3rem;font-weight:700;color:var(--gray-900);margin-bottom:0.75rem;">Career Conversion Programme (CCP)</h3>
+          <p style="color:var(--gray-500);font-size:0.9rem;line-height:1.6;">CCP for Air Transport Professionals and Coordinators helps employers broaden their talent pool by reskilling mid-career professionals.</p>
+          <div style="margin-top:1.5rem;"><button class="btn btn-outline" style="font-size:13px;padding:8px 18px;">Learn More</button></div>
+        </div>
+      </div>
+
+      <div class="section-header">
+        <span class="section-label">Schedule</span>
+        <h2 class="section-title">Programme Calendar 2026</h2>
+      </div>
+
+      <div style="background:var(--white);border:1px solid var(--gray-100);border-radius:14px;overflow:hidden;">
+        <table class="course-table">
+          <thead>
+            <tr>
+              <th>Course</th>
+              <th>Category</th>
+              <th>Date</th>
+              <th>Duration</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>DG by Air — Initial (CBTA)</strong></td><td><span class="badge badge-cbta">DG / CBTA</span></td><td>15 Jun 2026</td><td>3 days</td><td><span class="badge badge-open">Open</span></td></tr>
+            <tr><td><strong>DG by Air — Recurrent</strong></td><td><span class="badge badge-cbta">DG / CBTA</span></td><td>22 Jun 2026</td><td>1 day</td><td><span class="badge badge-open">Open</span></td></tr>
+            <tr><td><strong>Air Cargo Security Awareness</strong></td><td></td><td>1 Jul 2026</td><td>Half day</td><td><span class="badge badge-upcoming">Upcoming</span></td></tr>
+            <tr><td><strong>IATA Air Cargo Introductory</strong></td><td></td><td>7 Jul 2026</td><td>2 days</td><td><span class="badge badge-open">Open</span></td></tr>
+            <tr><td><strong>Perishable Cargo Handling</strong></td><td></td><td>14 Jul 2026</td><td>1 day</td><td><span class="badge badge-upcoming">Upcoming</span></td></tr>
+            <tr><td><strong>DG by Air — Initial (CBTA)</strong></td><td><span class="badge badge-cbta">DG / CBTA</span></td><td>20 Jul 2026</td><td>3 days</td><td><span class="badge badge-full">Full</span></td></tr>
+            <tr><td><strong>Live Animals Regulations</strong></td><td></td><td>4 Aug 2026</td><td>1 day</td><td><span class="badge badge-upcoming">Upcoming</span></td></tr>
+            <tr><td><strong>Air Waybill Completion</strong></td><td></td><td>11 Aug 2026</td><td>Half day</td><td><span class="badge badge-open">Open</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div style="margin-top:2rem; padding:1.25rem; background:var(--red-light); border-radius:12px; border-left:3px solid var(--red);">
+        <p style="font-size:0.9rem;color:var(--gray-700);">For training enquiries and registrations, contact SAAA at <strong style="color:var(--red);">saaasin@saaa.org.sg</strong> or call <strong style="color:var(--red);">(+65) 6545 4620</strong>.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     PUBLICATIONS PAGE
+══════════════════════════════════════════════════════════════ -->
+<div id="page-publications" class="page">
+  <div class="about-hero">
+    <div class="about-hero-inner">
+      <div class="breadcrumb"><a onclick="showPage('home')">Home</a><span>/</span><span>Publications</span></div>
+      <h1 class="page-title">Publications</h1>
+      <p class="page-subtitle">Industry insights, member news, and regulatory updates in the SAAA Perspectives newsletter.</p>
+    </div>
+  </div>
+
+  <section>
+    <div class="section-inner">
+      <div class="section-header">
+        <span class="section-label">Newsletter</span>
+        <h2 class="section-title">SAAA Perspectives</h2>
+        <p class="section-subtitle">Our quarterly publication keeping members informed on industry trends, regulatory changes, and association news.</p>
+      </div>
+
+      <div class="pub-grid">
+        <div class="pub-card"><div class="pub-cover"><svg viewBox="0 0 24 24"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg><span class="issue">Vol. 24 · Q1 2026</span><span class="pub-title">Perspectives</span></div><div class="pub-meta"><h4>Q1 2026</h4><p>Latest issue now available</p></div></div>
+        <div class="pub-card"><div class="pub-cover" style="background:linear-gradient(135deg,#6E0719,#9B0B22)"><svg viewBox="0 0 24 24"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg><span class="issue">Vol. 23 · Q4 2025</span><span class="pub-title">Perspectives</span></div><div class="pub-meta"><h4>Q4 2025</h4><p>Year-end special edition</p></div></div>
+        <div class="pub-card"><div class="pub-cover" style="background:linear-gradient(135deg,#3E3B38,#1A1816)"><svg viewBox="0 0 24 24"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg><span class="issue">Vol. 23 · Q3 2025</span><span class="pub-title">Perspectives</span></div><div class="pub-meta"><h4>Q3 2025</h4><p>Cargo digitalisation focus</p></div></div>
+        <div class="pub-card"><div class="pub-cover" style="background:linear-gradient(135deg,#1A6B8A,#0D4D6B)"><svg viewBox="0 0 24 24"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg><span class="issue">Vol. 23 · Q2 2025</span><span class="pub-title">Perspectives</span></div><div class="pub-meta"><h4>Q2 2025</h4><p>Sustainability in air cargo</p></div></div>
+      </div>
+
+      <div style="margin-top:3rem; padding:2rem; background:var(--white); border:1px solid var(--gray-100); border-radius:14px;">
+        <h3 style="font-weight:600;margin-bottom:0.75rem;">Advertise in Perspectives</h3>
+        <p style="font-size:0.9rem;color:var(--gray-500);margin-bottom:1rem;line-height:1.7;">Reach SAAA's network of air cargo professionals. For advertising enquiries and article contributions, contact us at <strong style="color:var(--red);">saaasin@saaa.org.sg</strong> or call <strong style="color:var(--red);">(+65) 6545 4620</strong>.</p>
+        <button class="btn btn-primary" style="font-size:13px;" onclick="showPage('contact')">Get Advertising Rates</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     CONTACT PAGE
+══════════════════════════════════════════════════════════════ -->
+<div id="page-contact" class="page">
+  <div class="about-hero">
+    <div class="about-hero-inner">
+      <div class="breadcrumb"><a onclick="showPage('home')">Home</a><span>/</span><span>Contact Us</span></div>
+      <h1 class="page-title">Contact Us</h1>
+      <p class="page-subtitle">Get in touch with the SAAA secretariat for membership, services, training, and general enquiries.</p>
+    </div>
+  </div>
+
+  <section>
+    <div class="section-inner">
+
+      <!-- Contact info cards row -->
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-bottom:2.5rem;">
+        <div class="contact-info-card" style="display:flex;align-items:flex-start;gap:1rem;padding:1.5rem;">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          </div>
+          <div><h4 style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--gray-300);margin-bottom:5px;">Address</h4><p style="font-size:0.875rem;color:var(--gray-700);line-height:1.6;">Singapore Aircargo Agents Association<br>75 Airport Boulevard, #01-01<br>Singapore 819664</p></div>
+        </div>
+        <div class="contact-info-card" style="display:flex;align-items:flex-start;gap:1rem;padding:1.5rem;">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+          </div>
+          <div><h4 style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--gray-300);margin-bottom:5px;">Phone</h4><p style="font-size:0.875rem;color:var(--gray-700);line-height:1.6;">(+65) 6545 4620</p></div>
+        </div>
+        <div class="contact-info-card" style="display:flex;align-items:flex-start;gap:1rem;padding:1.5rem;">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          </div>
+          <div><h4 style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--gray-300);margin-bottom:5px;">Email</h4><p style="font-size:0.875rem;color:var(--gray-700);line-height:1.6;">saaasin@saaa.org.sg</p></div>
+        </div>
+        <div class="contact-info-card" style="display:flex;align-items:flex-start;gap:1rem;padding:1.5rem;">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <div><h4 style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--gray-300);margin-bottom:5px;">Office Hours</h4><p style="font-size:0.875rem;color:var(--gray-700);line-height:1.6;">Monday – Friday<br>9:00 AM – 5:30 PM</p></div>
+        </div>
+      </div>
+
+      <!-- Google Maps embed -->
+      <div style="border-radius:16px;overflow:hidden;border:1px solid var(--gray-100);box-shadow:0 4px 20px rgba(0,0,0,0.06);">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.612440956893!2d103.9885!3d1.3596!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da3c0e3b5e17af%3A0x9e0b3e3b5f6f6f6f!2sSingapore%20Changi%20Airport!5e0!3m2!1sen!2ssg!4v1716000000000!5m2!1sen!2ssg"
+          width="100%"
+          height="480"
+          style="display:block;border:none;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="SAAA Office Location — Singapore Changi Airport area">
+        </iframe>
+      </div>
+
+      <div style="margin-top:1.5rem;padding:1.25rem 1.5rem;background:var(--red-light);border-radius:12px;border-left:3px solid var(--red);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;">
+        <p style="font-size:0.9rem;color:var(--gray-700);">Have an enquiry? Reach us directly at <strong style="color:var(--red);">saaasin@saaa.org.sg</strong> or call <strong style="color:var(--red);">(+65) 6545 4620</strong> during office hours.</p>
+        <a href="mailto:saaasin@saaa.org.sg" class="btn btn-primary" style="font-size:13px;padding:9px 20px;">Email Us</a>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     FOOTER (shared)
+══════════════════════════════════════════════════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="logo">
+          <div class="logo-mark" style="background:var(--red-dark)">
+            <svg viewBox="0 0 24 24" style="width:22px;height:22px;fill:white"><path d="M3 17l6-6 4 4 8-10"/></svg>
+          </div>
+          <div class="logo-text">
+            <span class="abbr">SAAA</span>
+            <span class="full">Singapore Aircargo Agents Association</span>
+          </div>
+        </div>
+        <p class="footer-tagline">"Connecting Singapore's air cargo community since 1972."</p>
+        <div class="social-links">
+          <a class="social-btn" href="https://www.facebook.com/pages/SAAA/834894096585648" target="_blank">
+            <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+          </a>
+          <a class="social-btn" href="https://www.linkedin.com/in/saaa-singapore-2b6861243/" target="_blank">
+            <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+          <a class="social-btn" href="https://www.instagram.com/saaasingapore/" target="_blank">
+            <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h5>About</h5>
+        <ul>
+          <li><a onclick="showPage('about')">Welcome Note</a></li>
+          <li><a onclick="showPage('about')">History &amp; Milestones</a></li>
+          <li><a onclick="showPage('about')">Vision &amp; Mission</a></li>
+          <li><a onclick="showPage('about')">Organisation Chart</a></li>
+          <li><a onclick="showPage('about')">Committees</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h5>Services</h5>
+        <ul>
+          <li><a onclick="showPage('services')">Neutral Airway Bill</a></li>
+          <li><a onclick="showPage('services')">Bar Code Labels</a></li>
+          <li><a onclick="showPage('services')">Certificates</a></li>
+          <li><a onclick="showPage('services')">Facilities</a></li>
+          <li><a onclick="showPage('services')">STC 2025</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h5>Resources</h5>
+        <ul>
+          <li><a onclick="showPage('training')">Training Courses</a></li>
+          <li><a onclick="showPage('training')">CBTA Updates</a></li>
+          <li><a onclick="showPage('publications')">Perspectives</a></li>
+          <li><a onclick="showPage('members')">Member Directory</a></li>
+          <li><a onclick="showPage('contact')">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2025 Singapore Aircargo Agents Association · All Rights Reserved</span>
+      <span>Designed with care · <a href="https://saaa.org.sg" target="_blank">saaa.org.sg</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function showPage(id) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page-' + id).classList.add('active');
+    document.querySelectorAll('.nav-links button').forEach(b => b.classList.remove('active'));
+    const navBtn = document.getElementById('nav-' + id);
+    if (navBtn) navBtn.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setTimeout(initReveal, 50);
+  }
+
+  function setFilter(btn, type) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.member-card').forEach(card => {
+      if (type === 'all' || card.dataset.type === type) {
+        card.style.display = '';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+
+  function initReveal() {
+    const reveals = document.querySelectorAll('.page.active .reveal');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => { el.classList.remove('visible'); obs.observe(el); });
+  }
+
+  initReveal();
+</script>
+</body>
+</html>
