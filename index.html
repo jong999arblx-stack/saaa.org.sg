@@ -327,31 +327,182 @@
 <div id="page-Installation" class="page">
   <div class="section-hero">
     <h1>Installing <em>ShelfLine</em> &amp; Setup</h1>
-    <p>Quick 5 minute setup guide</p>
+    <p>Complete Raspberry Pi + Android setup guide</p>
   </div>
+
   <div class="content-container">
+
+    <!-- HOW IT WORKS -->
+    <div class="card" style="margin-bottom:2rem;">
+      <h3>How ShelfLine Works</h3>
+      <p style="margin-bottom:1rem;">
+        ShelfLine allows Android devices to scan QR codes, capture expiry dates using OCR,
+        and store records directly into a MariaDB database hosted on a Raspberry Pi.
+      </p>
+
+      <div style="background:var(--gray-900); color:white; padding:1.5rem; border-radius:10px; font-family:monospace; overflow-x:auto;">
+Android phone<br>
+  └─ Step 1: scan product QR / barcode<br>
+  └─ Step 2: photograph expiry label (OCR → DDMMYYYY)<br>
+  └─ Step 3: confirm quantity & remarks<br>
+  └─ Save → Tailscale VPN → Raspberry Pi MariaDB<br>
+      </div>
+    </div>
+
+    <!-- INSTALL GRID -->
     <div class="grid-3">
-      </div>
+
+      <!-- PI SETUP -->
       <div class="card">
-        <h3>Setting up database</h3>
-        <p style="color:var(--gray-700); font-size:14px;">Runs on linux.</p>
+        <h3>1. Raspberry Pi Setup</h3>
+
+        <p style="margin-bottom:1rem; font-size:14px; color:var(--gray-700);">
+          Install MariaDB on your Raspberry Pi and connect it securely using Tailscale.
+        </p>
+
+        <div style="background:var(--warm-gray); padding:1rem; border-radius:8px; font-family:monospace; font-size:13px; overflow-x:auto;">
+sudo apt update && sudo apt upgrade -y
+sudo apt install mariadb-server -y
+sudo mariadb-secure-installation
+        </div>
+
+        <p style="margin-top:1rem; font-size:14px;">
+          Edit MariaDB config:
+        </p>
+
+        <div style="background:var(--warm-gray); padding:1rem; border-radius:8px; font-family:monospace; font-size:13px; overflow-x:auto;">
+sudo nano /etc/mysql/mariadb.conf.d/50-server.cnf
+        </div>
+
+        <p style="margin-top:1rem; font-size:14px;">
+          Change:
+        </p>
+
+        <div style="background:var(--warm-gray); padding:1rem; border-radius:8px; font-family:monospace; font-size:13px;">
+bind-address = 0.0.0.0
+        </div>
       </div>
+
+      <!-- DATABASE -->
       <div class="card">
-        <h3>Setting up machines to access database</h3>
-        <p style="color:var(--gray-700); font-size:14px;">Download Dbeaver here.</p>
+        <h3>2. Database Setup</h3>
+
+        <p style="margin-bottom:1rem; font-size:14px; color:var(--gray-700);">
+          Create the ShelfLine database and scanning table.
+        </p>
+
+        <div style="background:var(--warm-gray); padding:1rem; border-radius:8px; font-family:monospace; font-size:12px; overflow-x:auto; max-height:300px;">
+CREATE DATABASE qr_scanner;
+
+USE qr_scanner;
+
+CREATE TABLE scan_records (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  qr_code VARCHAR(500) NOT NULL,
+  expiry_date CHAR(8) NOT NULL,
+  quantity INT NOT NULL DEFAULT 1,
+  remarks VARCHAR(500) NOT NULL DEFAULT '',
+  scanned_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+        </div>
+
+        <p style="margin-top:1rem; font-size:14px;">
+          Enable access for the app:
+        </p>
+
+        <div style="background:var(--warm-gray); padding:1rem; border-radius:8px; font-family:monospace; font-size:12px; overflow-x:auto;">
+CREATE USER 'scanner_app'@'%'
+IDENTIFIED BY 'YourPassword';
+
+GRANT ALL PRIVILEGES ON qr_scanner.*
+TO 'scanner_app'@'%';
+        </div>
       </div>
+
+      <!-- ANDROID APP -->
       <div class="card">
-        <h3>Setting up android device</h3>
+        <h3>3. Android App Setup</h3>
+
+        <p style="margin-bottom:1rem; font-size:14px; color:var(--gray-700);">
+          Download the APK and connect it to your Raspberry Pi database server.
+        </p>
+
         <a 
           href="https://tinyurl.com/jongorbital"
           target="_blank"
-          style="color:var(--red); font-weight:600; text-decoration:none; font-size:14px; cursor:pointer;">
-          Download ShelfLine APK for Android
+          style="display:inline-block; margin-bottom:1rem; color:var(--red); font-weight:600; text-decoration:none; font-size:14px;">
+          Download ShelfLine APK →
         </a>
+
+        <div style="background:var(--warm-gray); padding:1rem; border-radius:8px;">
+          <ol style="padding-left:1rem; font-size:14px; color:var(--gray-700);">
+            <li>Open ShelfLine</li>
+            <li>Tap the menu icon</li>
+            <li>Enter your Pi Tailscale IP</li>
+            <li>Enter database password</li>
+            <li>Save settings</li>
+          </ol>
+        </div>
+
+        <p style="margin-top:1rem; font-size:14px;">
+          Settings are stored locally and persist between sessions.
+        </p>
       </div>
+    </div>
+
+    <!-- BUILDING APP -->
+    <div class="card" style="margin-top:2rem;">
+      <h3>Building ShelfLine from Source</h3>
+
+      <p style="margin-bottom:1rem;">
+        ShelfLine is built using Flutter and supports Android devices running Android 8+.
+      </p>
+
+      <div style="background:var(--gray-900); color:white; padding:1.5rem; border-radius:10px; font-family:monospace; overflow-x:auto;">
+# Install dependencies
+flutter pub get
+
+# Run debug build
+flutter run
+
+# Build release APK
+flutter build apk --release
+      </div>
+
+      <p style="margin-top:1rem; font-size:14px; color:var(--gray-500);">
+        Release APK output:
+        build/app/outputs/flutter-apk/app-release.apk
+      </p>
+    </div>
+
+    <!-- FEATURES -->
+    <div class="grid-3" style="margin-top:2rem;">
+
+      <div class="card">
+        <h3>QR & Barcode Scanning</h3>
+        <p style="font-size:14px; color:var(--gray-700);">
+          Fast camera-based product scanning with automatic record creation.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Expiry OCR Detection</h3>
+        <p style="font-size:14px; color:var(--gray-700);">
+          Detects and converts expiry dates into DDMMYYYY format automatically.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Tailscale Secure Access</h3>
+        <p style="font-size:14px; color:var(--gray-700);">
+          No port forwarding required. Devices communicate securely over private VPN networking.
+        </p>
+      </div>
+
     </div>
   </div>
 </div>
+
 
 <!-- ─── PAGE 5: TRAINING PAGE ─── -->
 <div id="page-training" class="page">
